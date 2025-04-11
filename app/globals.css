@@ -59,7 +59,7 @@
   
   /* Стили для ссылок */
   a {
-    @apply transition-colors hover:text-foreground/80;
+    @apply transition-colors hover:opacity-80;
   }
   
   /* Улучшенные стили для фокуса */
@@ -79,11 +79,6 @@
   /* Пользовательские утилиты */
   .text-balance {
     text-wrap: balance;
-  }
-  
-  /* Утилиты для прозрачности текста */
-  .text-foreground\/80 {
-    color: color-mix(in srgb, var(--foreground) 80%, transparent);
   }
 }
 
