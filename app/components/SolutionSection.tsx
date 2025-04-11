@@ -11,8 +11,8 @@ import { ReactNode } from 'react';
 
 export default function SolutionSection() {
   return (
-    <section className="w-full py-16 px-4 md:px-8 bg-gradient-to-b from-blue-900 to-purple-900 text-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full py-16 bg-gradient-to-b from-blue-900 to-purple-900 text-white">
+      <div className="container">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
           Решение: <span className="text-blue-400">ArbiSuite</span>
         </h2>
@@ -61,7 +61,7 @@ export default function SolutionSection() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-3">Интеграции с рекламными сетями</h3>
-            <p className="text-gray-300">
+            <p className="text-white/80">
               Telegram Ads, Meta Ads, TikTok и другие платформы в едином интерфейсе.
             </p>
           </div>
@@ -84,7 +84,7 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-300">{description}</p>
+      <p className="text-white/80">{description}</p>
     </div>
   );
 } 

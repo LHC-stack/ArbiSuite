@@ -59,12 +59,12 @@
   
   /* Стили для ссылок */
   a {
-    @apply transition-colors hover:text-[var(--foreground)]/80;
+    @apply transition-colors hover:text-foreground/80;
   }
   
   /* Улучшенные стили для фокуса */
   :focus-visible {
-    @apply outline-none ring-2 ring-[var(--ring)] ring-offset-2 ring-offset-[var(--background)];
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }
 
@@ -79,6 +79,11 @@
   /* Пользовательские утилиты */
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Утилиты для прозрачности текста */
+  .text-foreground\/80 {
+    color: color-mix(in srgb, var(--foreground) 80%, transparent);
   }
 }
 

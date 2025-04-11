@@ -61,25 +61,25 @@ export default function ContactForm() {
   };
   
   return (
-    <section className="w-full py-16 px-4 md:px-8 bg-gray-100 dark:bg-gray-900" id="early-access">
-      <div className="max-w-3xl mx-auto">
+    <section className="w-full py-16 bg-muted" id="early-access">
+      <div className="container max-w-3xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
           Получить ранний доступ
         </h2>
         
-        <p className="text-lg text-center mb-10 text-gray-700 dark:text-gray-300">
+        <p className="text-lg text-center mb-10 text-muted-foreground">
           Будьте в числе первых, кто испытает преимущества единой платформы для арбитража трафика и digital-маркетинга.
         </p>
         
         {isSubmitted ? (
-          <div className="bg-green-50 dark:bg-green-900/30 p-8 rounded-2xl text-center">
+          <div className="bg-green-50 dark:bg-green-900/30 p-8 rounded-xl border border-green-200 dark:border-green-900 text-center">
             <div className="w-16 h-16 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Спасибо!</h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <h3 className="text-2xl font-semibold mb-2">Спасибо!</h3>
+            <p className="text-muted-foreground">
               Вы успешно зарегистрировались на ранний доступ к ArbiSuite. Мы свяжемся с вами, как только будем готовы!
             </p>
           </div>
@@ -88,16 +88,16 @@ export default function ContactForm() {
             onSubmit={handleSubmit(onSubmit)} 
             action="https://formspree.io/f/xqapwezz" 
             method="POST"
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm"
+            className="bg-background p-8 rounded-xl border border-border"
           >
             {submitError && (
-              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg">
+              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg border border-red-200 dark:border-red-900">
                 {submitError}
               </div>
             )}
             
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email (обязательно) *
               </label>
               <input
@@ -110,7 +110,7 @@ export default function ContactForm() {
                     message: 'Неверный формат email'
                   }
                 })}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-background"
                 placeholder="your@email.com"
               />
               {errors.email && (
@@ -119,14 +119,14 @@ export default function ContactForm() {
             </div>
             
             <div className="mb-6">
-              <label htmlFor="telegram" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="telegram" className="block text-sm font-medium mb-2">
                 Telegram (по желанию)
               </label>
               <input
                 id="telegram"
                 type="text"
                 {...register('telegram')}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-background"
                 placeholder="@username"
               />
             </div>
@@ -137,7 +137,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? 'Отправка...' : 'Получить ранний доступ'}
               </button>

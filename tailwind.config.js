@@ -1,28 +1,36 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-      "./app/**/*.{js,ts,jsx,tsx,mdx}",
-      "./components/**/*.{js,ts,jsx,tsx,mdx}",
-      "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
-    theme: {
-      extend: {
-        colors: {
-          background: 'var(--background)',
-          foreground: 'var(--foreground)',
-          muted: 'var(--muted)',
-          'muted-foreground': 'var(--muted-foreground)',
-          accent: 'var(--accent)',
-          'accent-foreground': 'var(--accent-foreground)',
-          border: 'var(--border)',
-          input: 'var(--input)',
-          ring: 'var(--ring)',
+  darkMode: ["class", "[data-theme='dark']"],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
         },
-        fontFamily: {
-          sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-          mono: ['var(--font-mono)', 'monospace'],
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
         },
       },
+      borderColor: {
+        DEFAULT: "var(--border)",
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
     },
-    plugins: [],
-  }
+  },
+  plugins: [],
+} 
