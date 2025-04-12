@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { CurrencyDollarIcon, CodeBracketIcon, MegaphoneIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
@@ -10,6 +10,15 @@ interface FormData {
   email: string;
   role: string;
   message: string;
+}
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (callback: () => void) => void;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+    };
+  }
 }
 
 const roles = [
@@ -48,10 +57,14 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, formState: { errors }, watch } = useForm<FormData>();
   const selectedRole = watch('role');
+  const recaptchaRef = useRef<HTMLDivElement>(null);
 
   const onSubmit = async (data: FormData) => {
     try {
       setIsSubmitting(true);
+      
+      // Получаем токен reCAPTCHA
+      const token = await window.grecaptcha.execute('6LeE7BUrAAAAAAuDU94ACh1G8-89wjwKH__uKMu1', { action: 'submit' });
       
       // Создаем данные формы
       const formData = new FormData();
@@ -60,8 +73,9 @@ const ContactForm = () => {
       formData.append('role', data.role);
       formData.append('message', data.message || '');
       formData.append('_subject', 'Новая заявка на участие в проекте ArbiSuite');
+      formData.append('g-recaptcha-response', token);
       
-      // Отправляем на Formspree
+      // Отправляем на Formspree с reCAPTCHA
       const response = await fetch('https://formspree.io/f/xblgwylv', {
         method: 'POST',
         body: formData,
@@ -126,7 +140,13 @@ const ContactForm = () => {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <form 
+              onSubmit={handleSubmit(onSubmit)} 
+              className="space-y-8"
+              data-formspree-embed
+              action="https://formspree.io/f/xblgwylv"
+              method="POST"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {roles.map((role) => {
                   const Icon = role.icon;
@@ -218,6 +238,8 @@ const ContactForm = () => {
                 />
               </div>
 
+              <div className="g-recaptcha" data-sitekey="6LeE7BUrAAAAAAuDU94ACh1G8-89wjwKH__uKMu1" data-size="invisible" data-callback="onSubmit"></div>
+              
               <button
                 type="submit"
                 disabled={isSubmitting}

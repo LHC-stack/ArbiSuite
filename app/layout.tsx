@@ -62,6 +62,9 @@ const RootLayout = ({
           content="T3Ot8Iz_t3aZ_iQtCO4wnr3dLFmebAiyAvFOHQg0iHA" 
         />
         
+        {/* reCAPTCHA */}
+        <script src="https://www.google.com/recaptcha/api.js?render=6LeE7BUrAAAAAAuDU94ACh1G8-89wjwKH__uKMu1" async defer></script>
+        
         {/* Favicon */}
         <link
           rel="icon"
