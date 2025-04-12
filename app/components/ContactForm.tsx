@@ -50,11 +50,46 @@ const ContactForm = () => {
   const selectedRole = watch('role');
 
   const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    // Здесь будет логика отправки формы
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSubmitted(true);
-    setIsSubmitting(false);
+    try {
+      setIsSubmitting(true);
+      
+      // Создаем данные формы
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('role', data.role);
+      formData.append('message', data.message || '');
+      formData.append('_subject', 'Новая заявка на участие в проекте ArbiSuite');
+      
+      // Отправляем на Formspree
+      const response = await fetch('https://formspree.io/f/xblgwylv', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке формы');
+      }
+      
+      // Сохраняем в localStorage для резервной копии
+      const existingData = localStorage.getItem('arbiSuiteLeads');
+      const leads = existingData ? JSON.parse(existingData) : [];
+      leads.push({
+        ...data,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('arbiSuiteLeads', JSON.stringify(leads));
+      
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте ещё раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
