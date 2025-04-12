@@ -2,9 +2,9 @@
 module.exports = {
   darkMode: ["class", "[data-theme='dark']"],
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './src/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -27,7 +27,7 @@ module.exports = {
         DEFAULT: "var(--border)",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        sans: ['var(--font-inter)'],
         mono: ["var(--font-mono)", "monospace"],
       },
     },

@@ -1,25 +1,24 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
   display: "swap",
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "ArbiSuite — Единая платформа для арбитража трафика и digital-маркетинга",
   description: "ArbiSuite объединяет все необходимые инструменты для арбитражников и маркетологов: антидетект-браузер, AI-ассистент, трекер и генератор креативов в одном окне",
   keywords: "арбитраж трафика, digital-маркетинг, антидетект, трекер, AI-ассистент, keitaro, adsPower, арбитраж",
   authors: [{ name: "ArbiSuite Team" }],
-  viewport: "width=device-width, initial-scale=1",
+  metadataBase: new URL("https://arbisuite.io"),
   robots: "index, follow",
   openGraph: {
     title: "ArbiSuite — Единая платформа для арбитража трафика и digital-маркетинга",
@@ -45,11 +44,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="ru">
       <head>
@@ -87,10 +86,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[var(--background)] text-[var(--foreground)]`}
+        className={`${inter.variable} antialiased min-h-screen bg-[var(--background)] text-[var(--foreground)]`}
       >
         {children}
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

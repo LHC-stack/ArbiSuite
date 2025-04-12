@@ -1,66 +1,83 @@
 "use client";
 
-import { RocketLaunchIcon, WrenchScrewdriverIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, ArrowTrendingUpIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
-export default function StatusSection() {
+const statusItems = [
+  {
+    icon: ChartBarIcon,
+    title: "$63,87 млрд к 2033 году",
+    description: "Прогнозируемый объем рынка с ежегодным ростом (CAGR) 15,6% в период 2024-2033.",
+    gradient: "from-blue-500 to-blue-600"
+  },
+  {
+    icon: ArrowTrendingUpIcon,
+    title: "Высокий темп роста",
+    description: "Стабильный рост рынка digital-маркетинга, особенно в сегментах дейтинга, нутры, гемблинга и финансов.",
+    gradient: "from-purple-500 to-purple-600"
+  },
+  {
+    icon: GlobeAltIcon,
+    title: "Глобальный охват",
+    description: "Растущий спрос на инструменты автоматизации и управления трафиком во всех регионах мира.",
+    gradient: "from-indigo-500 to-indigo-600"
+  }
+];
+
+const StatusSection = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-8 bg-white dark:bg-black" id="status">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          Что сейчас?
-        </h2>
+    <section className="w-full py-24 relative overflow-hidden" id="status">
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
+      <div className="container relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            Потенциал рынка
+          </h2>
+        </motion.div>
         
-        <div className="bg-blue-50 dark:bg-blue-950 rounded-2xl p-8 shadow-sm border border-blue-100 dark:border-blue-900">
-          <div className="flex flex-col gap-6">
-            <StatusItem 
-              icon={<WrenchScrewdriverIcon className="w-6 h-6 text-blue-600" />}
-              title="ArbiSuite в разработке"
-              description="Мы создаём полноценную экосистему для арбитражников и маркетологов."
-            />
-            
-            <StatusItem 
-              icon={<UserGroupIcon className="w-6 h-6 text-indigo-600" />}
-              title="Собираем первых пользователей"
-              description="Формируем пул пользователей, которым нужна платформа all-in-one."
-            />
-            
-            <StatusItem 
-              icon={<RocketLaunchIcon className="w-6 h-6 text-purple-600" />}
-              title="Хотите попробовать первыми?"
-              description="Оставьте заявку на ранний доступ и получите приоритетное приглашение к бета-версии."
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+            <div className="flex flex-col gap-8">
+              {statusItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <div className="flex items-start gap-6">
+                    <div className={`w-14 h-14 bg-gradient-to-r ${item.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <item.icon className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-400 mt-2">{item.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          
-          <div className="mt-8 flex justify-center">
-            <a 
-              href="#early-access" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-            >
-              Получить ранний доступ →
-            </a>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-}
+};
 
-interface StatusItemProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-function StatusItem({ icon, title, description }: StatusItemProps) {
-  return (
-    <div className="flex items-start gap-4">
-      <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
-        {icon}
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 mt-1">{description}</p>
-      </div>
-    </div>
-  );
-} 
+export default StatusSection; 
